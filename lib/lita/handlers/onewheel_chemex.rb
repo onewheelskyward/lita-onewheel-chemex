@@ -3,6 +3,7 @@ module Lita
     class OnewheelChemex < Handler
       route /^chemex fresh$/i, :chemex_fresh, command: true, help: 'Report a fresh chemex pour.'
       route /^chemex$/i, :chemex_report, command: true, help: 'See when the last chemex was poured.'
+      route /^chemex reset$/i, :chemex_reset, command: true, help: 'Reset it when the chemex is empty.'
 
       def chemex_fresh(response)
         redis.set('chemex', Time.now)
@@ -18,6 +19,10 @@ module Lita
 
         chemex_age = Time::parse chemex_date
         response.reply "The chemex was brewed at #{chemex_age.strftime('%H:%M:%S')}"
+      end
+
+      def chemex_reset(response)
+        redis.set('chemex', nil)
       end
     end
 
