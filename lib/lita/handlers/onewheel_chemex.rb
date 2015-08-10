@@ -1,9 +1,18 @@
 module Lita
   module Handlers
     class OnewheelChemex < Handler
-      route /^chemex fresh$/i, :chemex_fresh, command: true, help: 'Report a fresh chemex pour.'
-      route /^chemex$/i, :chemex_report, command: true, help: 'See when the last chemex was poured.'
-      route /^chemex reset$/i, :chemex_reset, command: true, help: 'Reset it when the chemex is empty.'
+      route /^chemex fresh$/i,
+            :chemex_fresh,
+            command: true,
+            help: {'!chemex fresh' => 'Report a fresh chemex pour.'}
+      route /^chemex$/i,
+            :chemex_report,
+            command: true,
+            help: {'!chemex' => 'See when the last chemex was poured.'}
+      route /^chemex reset$/i,
+            :chemex_reset,
+            command: true,
+            help: {'!chemex reset' => 'Reset it when the chemex is empty.'}
 
       def chemex_fresh(response)
         redis.set('chemex', Time.now)
