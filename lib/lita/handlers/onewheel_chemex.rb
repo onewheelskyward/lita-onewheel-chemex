@@ -21,7 +21,7 @@ module Lita
 
       def chemex_report(response)
         chemex_date = redis.get('chemex')
-        if chemex_date.nil?
+        if chemex_date.to_s == ''
           response.reply 'There is no chemex.'
           return
         end
