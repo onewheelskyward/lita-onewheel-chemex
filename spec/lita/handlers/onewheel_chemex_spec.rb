@@ -16,6 +16,6 @@ describe Lita::Handlers::OnewheelChemex, lita_handler: true do
     send_command 'chemex fresh'
     send_command 'chemex reset'
     send_command 'chemex'
-    expect(replies.last).to include('There is no chemex.')
+    expect(replies.last).to include('Chemex is old and cold; make a new one!')
   end
 end
